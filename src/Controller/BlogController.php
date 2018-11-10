@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 class BlogController extends AbstractController
 {
@@ -18,9 +18,10 @@ class BlogController extends AbstractController
     }
 
     /**
-     * @Route("blog/{slug}"), requirements={"slug"="[a-z|0-9|-]"}, methods={"GET"}, name="blog_show")
+     * @Route("blog/{slug}", requirements={"slug"="[a-z|0-9|-]+"}, methods={"GET"}, name="blog_show")
+     * @param string $slug
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-
     public function show($slug = "Article Sans Titre")
     {
     $slug = ucwords(str_replace("-", " ", $slug));
