@@ -4,6 +4,9 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Response;
+use App\Entity\Article;
+use App\Entity\Category;
 
 
 class BlogController extends AbstractController
@@ -26,5 +29,16 @@ class BlogController extends AbstractController
     {
     $slug = ucwords(str_replace("-", " ", $slug));
         return $this->render('blog/show.html.twig', ['slug' => $slug]);
+    }
+
+    /**
+     * @Route("blogCat", name="blog_index")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function index()
+    {
+        $repository = $this->getDoctrine()->getRepository(Category::class);
+        $categories = $repository->findAll();
+        return $this->render('blog/index.html.twig', ['categories' => $categories]);
     }
 }

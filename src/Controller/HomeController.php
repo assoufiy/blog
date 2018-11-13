@@ -24,4 +24,4 @@ namespace App\Controller;
             return $this->render('home.html.twig');
 
         }
-    }
+   }
