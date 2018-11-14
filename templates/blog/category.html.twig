@@ -2,7 +2,8 @@
 {% block body %}
     <html>
     <body>
-        <h1>{{ category.name }}</h1>
+        <a href="{{ path('blog_index', {'id': category.id }) }}">{{ category.name }}</a>
+
     </body>
     </html>
 {% endblock %}
