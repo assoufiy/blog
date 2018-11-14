@@ -37,8 +37,10 @@ class BlogController extends AbstractController
      */
     public function index()
     {
+        $category = new Category();
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repository->findAll();
-        return $this->render('blog/index.html.twig', ['categories' => $categories]);
+        $articles = $category->getArticles();
+        return $this->render('blog/index.html.twig', ['categories' => $categories, 'articles' => $articles]);
     }
 }
