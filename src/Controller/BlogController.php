@@ -7,6 +7,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use App\Entity\Article;
 use App\Entity\Category;
+use App\Form\CategoryType;
+use Symfony\Component\HttpFoundation\Request;
+
 
 
 class BlogController extends AbstractController
@@ -35,13 +38,29 @@ class BlogController extends AbstractController
      * @Route("blogCat", name="blog_index")
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function index()
+    public function index(Request $request) : Response
     {
         $category = new Category();
         $repository = $this->getDoctrine()->getRepository(Category::class);
         $categories = $repository->findAll();
         $articles = $category->getArticles();
-        return $this->render('blog/index.html.twig', ['categories' => $categories, 'articles' => $articles]);
+
+        $category = new Category();
+        $form = $this->createForm(CategoryType::class, $category);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $data = $this->getDoctrine()->getManager();
+            $data->persist($category);
+            $data->flush();
+            // $data contient les données du $_POST
+
+        }
+
+        return $this->render('blog/index.html.twig', ['categories' => $categories, 'articles' => $articles, 'form' => $form->createView()]);
+
+
     }
 
     /**
