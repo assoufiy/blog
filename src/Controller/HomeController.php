@@ -16,7 +16,7 @@ namespace App\Controller;
     class HomeController extends AbstractController
     {
         /**
-         * @Route ("/")
+         * @Route ("/", name="homepage")
          */
 
         public function index()
