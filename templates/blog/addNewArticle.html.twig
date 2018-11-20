@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Ajout d'un nouveau article {% endblock %}
+
+{% block body %}
+
+    <h2> Ajout d'un nouveau article</h2>
+    {{ form_start(form) }}
+     {{ form_row(form.title) }}
+    {{ form_row(form.content) }}
+    {{ form_row(form.category) }}
+
+    <button class="btn">{{ button_label|default('Save') }}</button>
+    {{ form_end(form) }}
+{% endblock %}
+
+
+
+
+
+

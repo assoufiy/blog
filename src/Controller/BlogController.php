@@ -9,6 +9,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use Symfony\Component\HttpFoundation\Request;
+use App\Form\ArticleType;
 
 
 
@@ -57,10 +58,29 @@ class BlogController extends AbstractController
             // $data contient les données du $_POST
 
         }
-
         return $this->render('blog/index.html.twig', ['categories' => $categories, 'articles' => $articles, 'form' => $form->createView()]);
+    }
 
+    /**
+     * @Route("article/new", name="article_new")
+     * @return \Symfony\Component\HttpFoundation\Response
+     */
+    public function indexFormArticle(Request $request) : Response
+    {
 
+        $article = new Article();
+        $form = $this->createForm(ArticleType::class, $article);
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted()) {
+            $data = $this->getDoctrine()->getManager();
+            $data->persist($article);
+            $data->flush();
+            // $data contient les données du $_POST
+
+        }
+        return $this->render('blog/addNewArticle.html.twig', ['article' => $article, 'form' => $form->createView()]);
     }
 
     /**
