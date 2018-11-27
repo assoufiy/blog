@@ -21,8 +21,8 @@
         "symfony/twig-bundle": "*",
         "symfony/validator": "*",
         "symfony/web-link": "*",
-        "symfony/yaml": "*",
-      "ext-http": "*"
+        "symfony/webpack-encore-bundle": "^1.0",
+        "symfony/yaml": "*"
     },
     "require-dev": {
         "symfony/debug-pack": "*",
